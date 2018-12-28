@@ -1,2 +1,3 @@
-# slack-aws-java-integration
+# ChatOps : Slack AWS CloudFormation Integration
+
 slack aws java integration
