@@ -1,6 +1,7 @@
 package st.malike.bot.service;
 
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -13,6 +14,10 @@ public class PingServiceTest {
     //when
   }
 
+  @Test
+  public void testPlan() {
+
+  }
 
 
 }

@@ -2,7 +2,6 @@ package st.malike.bot.http;
 
 import static com.jayway.restassured.module.mockmvc.RestAssuredMockMvc.given;
 
-import st.malike.bot.SlackBotApplication;
 import com.jayway.restassured.module.mockmvc.RestAssuredMockMvc;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,31 +9,30 @@ import org.apache.http.HttpStatus;
 import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import st.malike.bot.SlackBotApplication;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SlackBotApplication.class)
 @WebAppConfiguration
 @IntegrationTest
-@ActiveProfiles(profiles = "test")
 public class PingControllerTest {
 
+  Map ping = null;
   @Autowired
   private PingController pingController;
-  Map ping = null;
 
   @Before
   public void setUp() {
 
     ping = new HashMap<>();
-
 
     RestAssuredMockMvc.standaloneSetup(pingController);
   }
@@ -69,7 +67,6 @@ public class PingControllerTest {
         .body("status", Matchers.is(true));
 //        .body("result.lastName", Matchers.is(member.get("lastName")));
   }
-
 
 
 }
