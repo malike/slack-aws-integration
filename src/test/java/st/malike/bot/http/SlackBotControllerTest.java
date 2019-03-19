@@ -9,7 +9,6 @@ import org.apache.http.HttpStatus;
 import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,18 +22,18 @@ import st.malike.bot.SlackBotApplication;
 @SpringApplicationConfiguration(classes = SlackBotApplication.class)
 @WebAppConfiguration
 @IntegrationTest
-public class PingControllerTest {
+public class SlackBotControllerTest {
 
   Map ping = null;
   @Autowired
-  private PingController pingController;
+  private SlackBotController slackBotController;
 
   @Before
   public void setUp() {
 
     ping = new HashMap<>();
 
-    RestAssuredMockMvc.standaloneSetup(pingController);
+    RestAssuredMockMvc.standaloneSetup(slackBotController);
   }
 
   @After
@@ -49,7 +48,7 @@ public class PingControllerTest {
         .log()
         .all().contentType("application/x-www-form-urlencoded")
         .when()
-        .post("/ping?token=gIkuvaNzQIHg97ATvDxqgjtO"
+        .post("/slack-bot?token=gIkuvaNzQIHg97ATvDxqgjtO"
             + "&team_id=T0001"
             + "&team_domain=example"
             + "&enterprise_id=E0001"
@@ -58,14 +57,12 @@ public class PingControllerTest {
             + "&channel_name=test"
             + "&user_id=U2147483697"
             + "&user_name=Steve"
-            + "&command=/weather"
-            + "&text=94070"
+            + "&command=/ping"
+            + "&text=URL"
             + "&response_url=https://hooks.slack.com/commands/1234/5678"
             + "&trigger_id=13345224609.738474920.8088930838d88f008e0")
         .then()
-        .statusCode(HttpStatus.SC_OK)
-        .body("status", Matchers.is(true));
-//        .body("result.lastName", Matchers.is(member.get("lastName")));
+        .statusCode(HttpStatus.SC_OK);
   }
 
 
