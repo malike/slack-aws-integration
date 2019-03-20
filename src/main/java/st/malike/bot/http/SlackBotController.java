@@ -42,15 +42,15 @@ public class SlackBotController extends ExceptionController {
       HttpServletResponse response,
       HttpServletRequest request) throws MissingParameterException, ParseException {
 
-    Enums.COMMANDS commandParam = Enums.COMMANDS.valueOf(command.replaceAll("/","").toUpperCase());
-    String commandResponse ="NO COMMAND HANDLER";
+    Enums.COMMANDS commandParam = Enums.COMMANDS.valueOf(command.replaceAll("/", "").toUpperCase());
+    String commandResponse = "NO COMMAND HANDLER";
     switch (commandParam) {
       case PING:
-        commandResponse= pingService.pingURL(text);
-      break;
+        commandResponse = pingService.pingURL(text);
+        break;
       case AWS:
-        commandResponse= awsService.executeAWSCommand(text);
-      break;
+        commandResponse = awsService.executeAWSCommand(text);
+        break;
     }
     return commandResponse;
   }

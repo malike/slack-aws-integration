@@ -6,7 +6,6 @@ import com.jayway.restassured.module.mockmvc.RestAssuredMockMvc;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.http.HttpStatus;
-import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
