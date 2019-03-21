@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 public class AWSService {
 
   public String executeAWSCommand(String text) {
-    return null;
+    String bashScript = "";
+    Process process = new ProcessBuilder("/bin/bash", "-c", bashScript);
   }
 }
