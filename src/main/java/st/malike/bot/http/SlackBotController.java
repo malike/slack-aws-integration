@@ -1,5 +1,6 @@
 package st.malike.bot.http;
 
+import java.io.IOException;
 import java.text.ParseException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import st.malike.bot.exception.MissingParameterException;
 import st.malike.bot.service.AWSService;
 import st.malike.bot.service.PingService;
+import st.malike.bot.service.ShellScriptExecutor;
 import st.malike.bot.util.Enums;
 
 @Controller
@@ -22,6 +24,8 @@ public class SlackBotController extends ExceptionController {
   private PingService pingService;
   @Autowired
   private AWSService awsService;
+  @Autowired
+  private ShellScriptExecutor shellScriptExecutor;
 
 
   @RequestMapping(value = "/slack-bot", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
@@ -40,7 +44,7 @@ public class SlackBotController extends ExceptionController {
       @RequestParam(value = "response_url") String response_url,
       @RequestParam(value = "trigger_id") String trigger_id,
       HttpServletResponse response,
-      HttpServletRequest request) throws MissingParameterException, ParseException {
+      HttpServletRequest request) throws MissingParameterException, ParseException, IOException {
 
     Enums.COMMANDS commandParam = Enums.COMMANDS.valueOf(command.replaceAll("/", "").toUpperCase());
     String commandResponse = "NO COMMAND HANDLER";
@@ -49,8 +53,10 @@ public class SlackBotController extends ExceptionController {
         commandResponse = pingService.pingURL(text);
         break;
       case AWS:
-        commandResponse = awsService.executeAWSCommand(text);
+        commandResponse = awsService.executeAWSCommand(text, channel_id);
         break;
+      case BASH:
+        commandResponse = shellScriptExecutor.executeShell(text, channel_id);
     }
     return commandResponse;
   }

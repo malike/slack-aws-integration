@@ -14,7 +14,12 @@ public class AWSServiceTest {
   }
 
   @Test
-  public void testPlan() {
+  public void testAWSMFAUsers() {
+
+  }
+
+  @Test
+  public void testAWSS3() {
 
   }
 
