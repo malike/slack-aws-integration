@@ -10,9 +10,9 @@ ARGV=($@)
 SLACK_CHANNEL=""
 FILTERED_BUCKETS=""
 
-function check_arguments {
-    if [ $# -ne 1 ]; then
-      help
+function check_arguments{
+    if [[ $ARGC -ne 1 ]]; then
+        help
     fi
 
     SLACK_CHANNEL="${ARGV[0]}"
