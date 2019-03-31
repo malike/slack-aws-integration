@@ -14,7 +14,7 @@ public class SlackServiceTest {
   }
 
   @Test
-  public void testPlan() {
+  public void sendToSlack() {
 
   }
 
