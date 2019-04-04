@@ -1,6 +1,7 @@
 package st.malike.bot.http;
 
 import java.text.ParseException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -16,6 +17,7 @@ public class ExceptionController {
   @ResponseBody
   public JSONResponse notFoundException(NotFoundException e) {
     JSONResponse jsonResponse = new JSONResponse();
+    jsonResponse.setHttpCode(HttpStatus.NOT_FOUND.value());
     jsonResponse.setCount(0);
     jsonResponse.setMessage("Data not Found");
     jsonResponse.setStatus(false);
@@ -28,6 +30,7 @@ public class ExceptionController {
   @ResponseBody
   public JSONResponse parseException(ParseException e) {
     JSONResponse jsonResponse = new JSONResponse();
+    jsonResponse.setHttpCode(HttpStatus.BAD_REQUEST.value());
     jsonResponse.setCount(0);
     jsonResponse.setMessage("Parameter not parsable");
     jsonResponse.setStatus(false);

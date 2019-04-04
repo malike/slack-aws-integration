@@ -2,6 +2,7 @@ package st.malike.bot.util;
 
 public class JSONResponse {
 
+  private int httpCode;
   public boolean status;
   public Object result;
   public long count;
@@ -37,5 +38,13 @@ public class JSONResponse {
 
   public void setMessage(String message) {
     this.message = message;
+  }
+
+  public int getHttpCode() {
+    return httpCode;
+  }
+
+  public void setHttpCode(int httpCode) {
+    this.httpCode = httpCode;
   }
 }

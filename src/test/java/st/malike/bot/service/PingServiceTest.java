@@ -25,7 +25,7 @@ public class PingServiceTest {
   private Environment environment;
   @Mock
   private RestTemplate restTemplate;
-
+  
   @Before
   public void setUp() {
     //when
