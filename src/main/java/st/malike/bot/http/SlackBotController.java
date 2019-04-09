@@ -28,7 +28,7 @@ public class SlackBotController extends ExceptionController {
   private ShellScriptExecutor shellScriptExecutor;
 
 
-  @RequestMapping(value = "/slack-bot", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+  @RequestMapping(value = "/plutobot", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   @ResponseBody
   public String ping(@RequestParam(value = "token", required = false) String token,
       @RequestParam(value = "team_id") String team_id,

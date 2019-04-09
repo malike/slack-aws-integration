@@ -10,7 +10,7 @@ ARGV=($@)
 SLACK_CHANNEL=""
 FILTERED_BUCKETS=""
 
-function check_arguments{
+function check_arguments() {
     if [[ $ARGC -ne 1 ]]; then
         help
     fi
@@ -18,7 +18,7 @@ function check_arguments{
     SLACK_CHANNEL="${ARGV[0]}"
 }
 
-function help {
+function help() {
     printf "\n\nUSAGE: aws-s3check.sh slack-channel-id \n\n"
 
     printf "\n\nEXAMPLE:\n"
@@ -28,36 +28,34 @@ function help {
     exit 1
 }
 
-function main{
+function main() {
 
-  check_arguments
-  echo "Getting buckets ...."
-  get_buckets
-  echo "Checking accessibility... "
-  check_accessibility
-  echo "Uploading response to slack channel"
-  send_to_slack
+    check_arguments
+    echo "Getting buckets ...."
+    get_buckets
+    echo "Checking accessibility... "
+    check_accessibility
+    echo "Uploading response to slack channel"
+    send_to_slack
 
-
-  echo "COMPLETE!"
-  exit 0
+    echo "COMPLETE!"
+    exit 0
 }
 
-function check_accessibility_for_bucket {
-
-}
-
-function get_buckets {
+function check_accessibility_for_bucket() {
 
 }
 
-function check_accessibility {
+function get_buckets() {
 
 }
 
-function send_to_slack {
- $(slack chat send --text $FILTERED_BUCKETS --channel "#"$SLACK_CHANNEL)
+function check_accessibility() {
+
 }
 
+function send_to_slack() {
+    $(slack chat send --text $FILTERED_BUCKETS --channel "#"$SLACK_CHANNEL)
+}
 
 main
