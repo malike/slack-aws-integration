@@ -31,11 +31,11 @@ function check_arguments() {
 }
 
 function help() {
-    printf "\n\nUSAGE: aws-ecs-scale.sh down cluster-name desired-count \n\n"
+    printf "\n\nUSAGE: aws-lb-scale.sh down cluster-name desired-count \n\n"
 
     printf "\n\nEXAMPLE:\n"
-    echo " aws-ecs-scale.sh up staging-one 4\n"
-    echo " aws-ecs-scale.sh down staging-one 1"
+    echo " aws-lb-scale.sh up staging-one 4\n"
+    echo " aws-lb-scale.sh down staging-one 1"
 
     printf "\n"
     exit 1

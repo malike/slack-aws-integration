@@ -2,10 +2,10 @@ package st.malike.bot.util;
 
 public class JSONResponse {
 
-  private int httpCode;
   public boolean status;
   public Object result;
   public long count;
+  private int httpCode;
   private String message;
 
   public boolean isStatus() {
