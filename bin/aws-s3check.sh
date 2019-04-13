@@ -47,7 +47,9 @@ function check_accessibility_for_bucket() {
 }
 
 function get_buckets() {
-
+    echo "Getting buckets ...."
+    FILTERED_BUCKETS=$(aws s3api list-buckets)
+    echo "Fetched $(echo FILTERED_BUCKETS | jq '.Buckets | length') buckets"
 }
 
 function check_accessibility() {
