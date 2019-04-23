@@ -61,12 +61,14 @@ function check_accessibility() {
     echo "" >S3_PRIVATE
     echo "" >S3_PUBLIC
     for BUCKETS in $(echo "${FILTERED_BUCKETS}" | jq -c '.Buckets[].Name'); do
-        BUCKET_PERMISSION=$(aws s3api get-bucket-acl --bucket $BUCKETS)
-        # echo "MFA for $AWS_USERAME is $MFA_DEVICE_COUNT"
-        if [[ $MFA_DEVICE_COUNT -lt 1 ]]; then
-            echo "$AWS_USERAME" >>USERS_NO_MFA_FILE
+        BUCKET_NAME=$(echo $BUCKETS | tr -d '"')
+        BUCKET_POLICY=$(aws s3api get-bucket-policy-status --bucket $BUCKET_NAME)
+        BUCKET_POLICY_IS_PUBLIC=$(echo $BUCKET_POLICY | jq -c '.PolicyStatus.IsPublic')
+        echo "Policy status for bucket $BUCKET_NAME is $BUCKET_POLICY_IS_PUBLIC"
+        if [[ "$BUCKET_POLICY_IS_PUBLIC" = true ]]; then
+            echo "$BUCKET_NAME" >>S3_PUBLIC
         else
-            echo "$AWS_USERAME" >>USERS_MFA_FILE
+            echo "$BUCKET_NAME" >>S3_PRIVATE
         fi
     done
 }
