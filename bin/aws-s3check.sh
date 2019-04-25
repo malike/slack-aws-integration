@@ -40,7 +40,7 @@ function main() {
     check_arguments
     get_buckets
     check_accessibility
-    # send_to_slack
+    send_to_slack
 
     echo "COMPLETE!"
     exit 0
@@ -75,7 +75,6 @@ function check_accessibility() {
 
 function send_to_slack() {
     echo "Uploading response to slack channel"
-    # $(slack chat send --text $FILTERED_BUCKETS --channel "#"$SLACK_CHANNEL)
 }
 
 main
