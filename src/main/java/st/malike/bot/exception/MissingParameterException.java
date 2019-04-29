@@ -1,6 +1,6 @@
 package st.malike.bot.exception;
 
-public class MissingParameterException extends Exception {
+public  class  MissingParameterException extends Exception {
 
   public MissingParameterException() {
   }
