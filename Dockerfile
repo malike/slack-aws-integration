@@ -1,7 +1,7 @@
-FROM alpine:latest
-
-# Testing: pamtester
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing/" >> /etc/apk/repositories && \
-    apk add --update openvpn iptables bash easy-rsa openvpn-auth-pam google-authenticator pamtester && \
-    ln -s /usr/share/easy-rsa/easyrsa /usr/local/bin && \
-    rm -rf /tmp/* /var/tmp/* /var/cache/apk/* /var/cache/distfiles/*
+FROM openjdk:8
+VOLUME /tmp
+ADD target/slack-bot-0.0.1-SNAPSHOT.jar slack-bot-0.0.1-SNAPSHOT.jar
+RUN sh -c 'touch /slack-bot-0.0.1-SNAPSHOT.jar'
+ENV JAVA_OPTS="-Xms64m -Xmx256m"
+EXPOSE 8080
+ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=docker -jar /slack-bot-0.0.1-SNAPSHOT.jar" ]

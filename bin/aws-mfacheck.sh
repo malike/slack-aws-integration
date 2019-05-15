@@ -58,7 +58,6 @@ function check_mfa() {
     AWS_USERAME=$(echo $UNAME | tr -d '"')
     MFA_DEVICE=$(aws iam list-mfa-devices --user-name $AWS_USERAME)
     MFA_DEVICE_COUNT=$(echo $MFA_DEVICE | jq '.MFADevices | length')
-    # echo "MFA for $AWS_USERAME is $MFA_DEVICE_COUNT"
     if [[ $MFA_DEVICE_COUNT -lt 1 ]]; then
       echo "$AWS_USERAME">>USERS_NO_MFA_FILE
     else
@@ -71,7 +70,7 @@ function send_to_slack() {
   echo "Sending list to Slack"
   printf "Fetch No MFA Users"
   echo "$(<USERS_NO_MFA_FILE)"  
-  #  $(slack chat send --text $FILTERED_USERS --channel "#"$SLACK_CHANNEL)
+  $(slack chat send --text $FILTERED_USERS --channel "#"$SLACK_CHANNEL)
 }
 
 main
